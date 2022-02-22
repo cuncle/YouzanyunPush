@@ -1,13 +1,13 @@
 package YouzanyunPush
 
 import (
-"crypto/md5"
-"encoding/hex"
-"encoding/json"
-"errors"
+	"crypto/md5"
+	"encoding/hex"
+	"encoding/json"
+	"errors"
 	"fmt"
 	"io/ioutil"
-"net/http"
+	"net/http"
 )
 
 /*
@@ -31,15 +31,6 @@ func md5sign(str string) string {
 	h.Write([]byte(str))
 	return hex.EncodeToString(h.Sum(nil))
 }
-
-// 构建一个 youzanclient 的对象
-func New(clientId, clientSecret string) *YouzanClient {
-	return &YouzanClient{
-		ClientId:     clientId,
-		ClientSecret: clientSecret,
-	}
-}
-
 // 计算签名 client_id + entity + client_secret 用户计算防伪签名 event-Sign
 
 func (client *YouzanClient) Verifysign(req *http.Request) (err error) {
@@ -62,9 +53,7 @@ func (client *YouzanClient) Verifysign(req *http.Request) (err error) {
 	}
 }
 
-func YouzanPush(w http.ResponseWriter, r *http.Request) {
-
-	client := New(clientId, clientSecret)
+func (client *YouzanClient)YouzanPush(w http.ResponseWriter, r *http.Request) {
 	err := client.Verifysign(r)
 	w.Header().Set("Content-Type", "application/json")
 	if err == nil {
@@ -75,6 +64,3 @@ func YouzanPush(w http.ResponseWriter, r *http.Request) {
 	}
 
 }
-
-
-
