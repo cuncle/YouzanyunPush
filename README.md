@@ -39,7 +39,7 @@ func main() {
 curl -X POST \
   http://127.0.0.1:8888/ \
   -H 'content-type: application/json' \
-  -H 'event-sign: 4a53ae0b22d6ab013ec53ee291d688b' \
+  -H 'event-sign: 4a553ae0b22d6ab013ec53ee291d688b' \
   -d '{"test":1}'
 
 ```
