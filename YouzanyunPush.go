@@ -5,7 +5,8 @@ import (
 "encoding/hex"
 "encoding/json"
 "errors"
-"io/ioutil"
+	"fmt"
+	"io/ioutil"
 "net/http"
 )
 
@@ -53,7 +54,7 @@ func (client *YouzanClient) Verifysign(req *http.Request) (err error) {
 	}
 
 	md5string := client.ClientId + string(reqBody) + client.ClientSecret
-	//fmt.Println(md5sign(md5string))
+	fmt.Println(md5sign(md5string))
 	if md5sign(md5string) == eventSign {
 		return nil
 	} else {
